@@ -31,7 +31,7 @@ Anonymous Contributor -- 170098 views
 Markoff Chaney -- 84557 views
 ```
 
-Selection 3 calls the `get_404s` function and should return something like this:
+Selection 3 calls the `get_404s()` function and should return something like this:
 ```
 The days on which more than 1% of requests lead to errors are: 
 
