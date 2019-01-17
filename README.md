@@ -1,9 +1,38 @@
-### News Data Project
+###News Data Project
 
-NOTE: This script uses Python 3.
+### Required Packages
+Python 3 ([Download](https://www.python.org/downloads/))
+psycopg2: Run `pip install psycopg2`.
 
-Run the program in your terminal by typing `$ python newsdata.py`
+### Environment Setup
+##### Download and Install
+__Virtualbox__ ([Download](https://www.virtualbox.org/wiki/Downloads)). Install the platform package for your operating system. You do not need the extension pack or the SDK
 
+__Vagrant__ ([Download](https://www.vagrantup.com/downloads.html)). Vagrant is the software that configures the VM and lets you share files between your host computer and the VM's filesystem. __Windows users:__ The Installer may ask you to grant network permissions to Vagrant or make a firewall exception. Be sure to allow this.
+
+##### Download the VM configuration
+You can download and unzip this file: [FSND-Virtual-Machine.zip](https://s3.amazonaws.com/video.udacity-data.com/topher/2018/April/5acfbfa3_fsnd-virtual-machine/fsnd-virtual-machine.zip) This will give you a directory called __FSND-Virtual-Machine__. It may be located inside your __Downloads__ folder.
+
+Alternately, you can use Github to fork and clone the repository https://github.com/udacity/fullstack-nanodegree-vm.
+
+##### Start the virtual machine
+From your terminal, inside the vagrant subdirectory, run the command `vagrant up`. This will cause Vagrant to download the Linux operating system and install it. This may take quite a while (many minutes) depending on how fast your Internet connection is.
+
+When `vagrant up` is finished running, you will get your shell prompt back. At this point, you can run `vagrant ssh` to log in to your newly installed Linux VM!
+
+Inside the VM, change directory to `/vagrant` and look around with `ls`.
+
+The files you see here are the same as the ones in the `vagrant` subdirectory on your computer (where you started Vagrant from). Any file you create in one will be automatically shared to the other. This means that you can edit code in your favorite text editor, and run it inside the VM.
+
+Files in the VM's `/vagrant` directory are shared with the `vagrant` folder on your computer. But other data inside the VM is not. For instance, the PostgreSQL database itself lives only inside the VM.
+
+To run this program, make sure all the program files are within the `vagrant` folder on your machine and then change directory to where those files live. If you have already installed the database on your virtual machine, run `python newsdata.py`. Otherwise, read on.
+
+##### Set up the database
+[Download the database data](https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f748_newsdata/newsdata.zip) and unzip it into your `vagrant` directory. On your virtual machine in the same directory as the sql file run `psql -d news -f newsdata.sql`. Now the data is imported into your database and the program can be run.
+
+
+### Running the Program
 You will be prompted to make a selection:
 ```
 1. What are the most popular three articles of all time? 
