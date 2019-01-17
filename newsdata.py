@@ -1,10 +1,11 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 
 import sys
 import psycopg2
 
 # define the database connection
 db = psycopg2.connect("dbname=news")
+
 
 # Get the 3 most popular posts and return the title and number of views.
 # Order highest to lowest
@@ -15,7 +16,7 @@ def get_articles():
     and log.status not like '%404%' \
     group by articles.title \
     order by views desc \
-    limit 3;") 
+    limit 3;")
 
     # excecute the query
     articles = q.fetchall()
@@ -28,7 +29,8 @@ def get_articles():
     for article in articles:
         print('"' + article[0] + '" -- ' + str(article[1]) + ' views')
 
-# Get the most popular authors and and number of views. 
+
+# Get the most popular authors and and number of views.
 # Order highest to lowest.
 def get_authors():
     q = db.cursor()
@@ -41,7 +43,7 @@ def get_authors():
     like '%' || author_list.slug || '%' \
     and log.status not like '%404%' \
     group by author_list.name \
-    order by views desc;") 
+    order by views desc;")
 
     # excecute the query
     authors = q.fetchall()
@@ -54,11 +56,13 @@ def get_authors():
     for author in authors:
         print(author[0] + ' -- ' + str(author[1]) + ' views')
 
+
 def get_404s():
     q = db.cursor()
     q.execute("select to_char(time::date, 'FMMonth DD, YYYY') as date, \
     to_char( \
-    (count(*) filter(where status like '%404%') * 100.0 / count(*)), 'FM990.00\"%\"') as percent \
+    (count(*) filter(where status like '%404%') * 100.0 / count(*)), \
+    'FM990.00\"%\"') as percent \
     from log \
     group by date \
     having (count(*) filter(where status like '%404%') *100.0 / count(*)) > 1 \
@@ -67,13 +71,15 @@ def get_404s():
     # execute the query
     days = q.fetchall()
 
-    #close the connection to the database
+    # close the connection to the database
     db.close()
 
     # print the results
-    print(" \nThe days on which more than 1% of requests lead to errors are: \n")
+    print(" \nThe days on which more than 1% of \
+    requests lead to errors are: \n")
     for day in days:
         print(day[0] + ' -- ' + day[1] + ' errors')
+
 
 # Ask the user which query to run
 def get_input():
