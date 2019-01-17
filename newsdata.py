@@ -4,7 +4,10 @@ import sys
 import psycopg2
 
 # define the database connection
-db = psycopg2.connect("dbname=news")
+try:
+    db = psycopg2.connect("dbname=news")
+except psycopg2.Error as e:
+    print ("Unable to connect to the database")
 
 
 # Get the 3 most popular posts and return the title and number of views.
